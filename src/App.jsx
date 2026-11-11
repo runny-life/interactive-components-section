@@ -1,5 +1,6 @@
+import styles from './App.module.scss';
 import { useEffect, useState } from 'react';
-import CommentCard from './componetns/CommentCard.jsx';
+import CommentCard from './componetns/ComponentsCard/CommentCard.jsx';
 
 function App() {
   const [data, setData] = useState(null);
@@ -11,7 +12,15 @@ function App() {
   }, []);
 
   if (!data) return <p>...loading</p>;
-  return <CommentCard comment={data.comments[0]} currentUser={data.currentUser} />;
+  return (
+    <ul className={styles.list}>
+      {data.comments.map((comment) => (
+        <li className={styles.item} key={comment.id}>
+          <CommentCard comment={comment} currentUser={data.currentUser} />
+        </li>
+      ))}
+    </ul>
+  );
 }
 
 export default App;

@@ -1,0 +1,16 @@
+@use '../abstracts' as *;
+
+body {
+  min-height: 100vh;
+  font-family: $font-family-base;
+  color: $color-grey-500;
+  background-color: $color-grey-50;
+}
+
+#root {
+  min-height: 100vh;
+  max-width: calc($container-width + $container-padding-x * 2);
+  width: 100%;
+  padding-inline: $container-padding-inline;
+  margin-inline: auto;
+}
