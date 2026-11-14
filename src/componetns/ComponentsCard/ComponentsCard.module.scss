@@ -94,6 +94,10 @@
   cursor: pointer;
 }
 
+.likesButtonActive {
+  color: $color-purple-600;
+}
+
 .likesScore {
   @include text-preset-2-medium;
 

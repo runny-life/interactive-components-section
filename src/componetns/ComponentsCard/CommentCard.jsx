@@ -35,9 +35,9 @@ function CommentCard({ comment, currentUser, isReply = false, onLikes }) {
         <div className={styles.actions}>
           <div className={styles.likes}>
             <button
-              className={styles.likesButton}
+              className={`${styles.likesButton} ${comment.votedByMe === 'up' ? styles.likesButtonActive : ''}`}
               type="button"
-              onClick={() => onLikes(comment.id, 1)}
+              onClick={() => onLikes(comment.id, 'up')}
             >
               <svg width="11" height="11" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                 <path
@@ -48,9 +48,9 @@ function CommentCard({ comment, currentUser, isReply = false, onLikes }) {
             </button>
             <span className={styles.likesScore}>{comment.score}</span>
             <button
-              className={styles.likesButton}
+              className={`${styles.likesButton} ${comment.votedByMe === 'down' ? styles.likesButtonActive : ''}`}
               type="button"
-              onClick={() => onLikes(comment.id, -1)}
+              onClick={() => onLikes(comment.id, 'down')}
             >
               <svg width="11" height="3" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                 <path

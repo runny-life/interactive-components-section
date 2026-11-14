@@ -1,6 +1,7 @@
 import styles from './App.module.scss';
 import { useEffect, useState } from 'react';
 import CommentCard from './componetns/ComponentsCard/CommentCard.jsx';
+import { applyLikes } from '@/utils/applyLikes.js';
 
 function App() {
   const [comments, setComments] = useState([]);
@@ -17,16 +18,16 @@ function App() {
       });
   }, []);
 
-  function handleLikes(id, delta) {
+  function handleLikes(id, direction) {
     setComments((prev) =>
       prev.map((comment) => {
         if (comment.id === id) {
-          return { ...comment, score: comment.score + delta };
+          return applyLikes(comment, direction);
         }
         return {
           ...comment,
           replies: comment.replies.map((reply) =>
-            reply.id === id ? { ...reply, score: reply.score + delta } : reply,
+            reply.id === id ? applyLikes(reply, direction) : reply,
           ),
         };
       }),

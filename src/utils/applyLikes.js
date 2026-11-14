@@ -10,5 +10,5 @@ export function applyLikes(item, direction) {
     return { ...item, score: item.score + (isUp ? 1 : -1), votedByMe: direction };
   }
 
-  return { ...item, score: item.score + (isUp ? 2 : -1), votedByMe: direction };
+  return { ...item, score: item.score + (isUp ? 2 : -2), votedByMe: direction };
 }
