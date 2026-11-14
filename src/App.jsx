@@ -3,20 +3,42 @@ import { useEffect, useState } from 'react';
 import CommentCard from './componetns/ComponentsCard/CommentCard.jsx';
 
 function App() {
-  const [data, setData] = useState(null);
+  const [comments, setComments] = useState([]);
+  const [currentUser, setCurrentUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetch('/data.json')
       .then((res) => res.json())
-      .then((json) => setData(json));
+      .then((json) => {
+        setComments(json.comments);
+        setCurrentUser(json.currentUser);
+        setLoading(false);
+      });
   }, []);
 
-  if (!data) return <p>...loading</p>;
+  function handleLikes(id, delta) {
+    setComments((prev) =>
+      prev.map((comment) => {
+        if (comment.id === id) {
+          return { ...comment, score: comment.score + delta };
+        }
+        return {
+          ...comment,
+          replies: comment.replies.map((reply) =>
+            reply.id === id ? { ...reply, score: reply.score + delta } : reply,
+          ),
+        };
+      }),
+    );
+  }
+
+  if (loading) return <p>...loading</p>;
   return (
     <ul className={styles.list}>
-      {data.comments.map((comment) => (
+      {comments.map((comment) => (
         <li className={styles.item} key={comment.id}>
-          <CommentCard comment={comment} currentUser={data.currentUser} />
+          <CommentCard comment={comment} currentUser={currentUser} onLikes={handleLikes} />
         </li>
       ))}
     </ul>
