@@ -74,3 +74,9 @@
   font-size: rem(13px);
   line-height: 1.2;
 }
+
+@mixin tablet {
+  @media (min-width: 768px) {
+    @content;
+  }
+}

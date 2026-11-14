@@ -1,3 +1,18 @@
 .list {
+  display: grid;
+  gap: rem(16px);
   list-style: none;
+
+  @include tablet {
+    gap: rem(24px);
+  }
+}
+
+.item {
+  display: grid;
+  gap: 16px;
+
+  @include tablet {
+    gap: rem(24px);
+  }
 }

@@ -1,6 +1,8 @@
 @use '../abstracts' as *;
 
 body {
+  @include text-preset-2-regular;
+
   min-height: 100vh;
   font-family: $font-family-base;
   color: $color-grey-500;
